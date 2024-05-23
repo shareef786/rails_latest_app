@@ -33,7 +33,7 @@ def string_validator?(string)
 
   # puts matched_chars.key(')')
 end
-string = "(]"
+# string = "(]"
 # puts string_validator?(string)
 
 ## Given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_132528) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_112952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,27 +21,3 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_132528) do
   end
 
 end
-
-def is_valid(str)
-  stack = []
-  bracket_pairs = {
-    '(' => ')',
-    '{' => '}',
-    '[' => ']',
-  }
-
-  str.each_char do |c|
-    if bracket_pairs.keys.include?(c)
-      stack.push(c) # {
-    elsif bracket_pairs.values.include?(c)
-      return false if stack.empty? || stack.pop != bracket_pairs.key(c)
-    end
-  end
-  return stack.empty?
-end
-
-# str = "{}"
-# first iteration
-# stack = {
-# second iteration
-# came to else condition and stack empty and { != }
