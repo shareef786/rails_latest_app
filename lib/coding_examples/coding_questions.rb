@@ -41,13 +41,19 @@ end
 # Given A = [1, 2, 3], the function should return 4.
 # Given A = [−1, −3], the function should return 1.
 
-A = [1, 2, 3]
+A = [1, 2, 8]
 def return_missing_int(array)
-  array.sort.each do |n|
-    return 1 if n < 0
-    return n+1 unless A.include? n+1
-  end
+  # array.sort.each do |n|
+  #   return 1 if n < 0
+  #   return n+1 unless A.include? n+1
+  # end
+  count = 0
+(1..array.max).each do |i|
+count += 1 if !array.include?(i)
+return i if count == 1
+end
 end
 
 puts return_missing_int(A)
-puts (1..A.length+1).find{|n| A.include?(n).!}
+# res = (1..A.max).map{|n| A.include?(n).!}
+# puts res

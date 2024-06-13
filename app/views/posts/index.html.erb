@@ -1,0 +1,35 @@
+<div class="flex-column" style = "height: auto;">
+  <h1> Posts </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Post Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Title </td>
+          <td class="text-center"> Content </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @posts.each do |p| %>
+          <tr>
+            <td class="text-center"> <%= p.id %> </td>
+            <td class="text-center"> <%= link_to p.title, post_path(p) %> </td>
+            <td class="text-center"> <%= p.content %> </td>
+            <td class="text-center"><%= button_to "Show",post_path(p),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_post_path(p),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",post_path(p),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to "Add New Post", new_post_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>

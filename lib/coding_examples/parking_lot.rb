@@ -35,11 +35,17 @@ class Floor
 
   def initialize(floor_number, number_of_spots)
     @floor_number = floor_number
-    @spots = Array.new(number_of_spots){|s| Spot.new(s)}
+    @spots = 1.upto(number_of_spots).map{|s| Spot.new(s)}
   end
 
   def available_spot
     @spots.find{|s| s if s.available?}
+  end
+
+  def display_availability
+    available_spots = @spots.select{|s| s.available?}
+    puts "#{available_spots.count} available Spots in floor #{floor_number}"
+    puts available_spots.inspect
   end
 end
 
@@ -47,7 +53,7 @@ class ParkingLot
   attr_reader :floors
   
   def initialize(number_of_floors, spots_per_each_floor)
-    @floors = Array.new(number_of_floors){|f| Floor.new(f, spots_per_each_floor)}
+    @floors = 1.upto(number_of_floors).map{|f| Floor.new(f, spots_per_each_floor)}
   end
 
   def park_vehicle(vehicle_number)
@@ -76,12 +82,28 @@ class ParkingLot
       puts "Vehicle number #{vehicle_number} has removed from spot#{spot_number} in floor#{floor_number}"
     end
   end
+
+  # def display_availability
+    # @floors.each{|floor| puts floor.display_availability}
+  # end
+
+  def method_missing(method_name)
+    puts "#{method_name} does not exist"
+    puts "Now creating display_availability method"
+    # self.class::class_eval{ define_method(:display_availability){@floors.each{|floor| puts floor.display_availability} }}
+    self.class.send( :define_method, method_name, lambda{ @floors.each{|floor| puts floor.display_availability}})
+    self.class.send( :define_method, :xyz, lambda {puts "Hello World"})
+    # self.class::class_eval{ define_method(:xyz){ puts "Hello World"}}
+  end
 end
 
-parking_lot = ParkingLot.new(1, 3)
+parking_lot = ParkingLot.new(3, 3)
+parking_lot.display_availability
 # puts parking_lot.inspect
-parking_lot.park_vehicle("KA03NE8144")
+# parking_lot.park_vehicle("KA03NE8144")
 # parking_lot.park_vehicle("HYD03NE1234")
 # parking_lot.park_vehicle("PY03NE1234")
 # parking_lot.park_vehicle("TN03NE1234")
-parking_lot.remove_vehicle(0,0,"KA03NE8144")
+# parking_lot.remove_vehicle(1,1,"KA03NE8144")
+parking_lot.display_availability
+parking_lot.xyz

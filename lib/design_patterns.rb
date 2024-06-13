@@ -26,3 +26,25 @@ class MetricBuilder
     yield(builder)
   end
 end
+
+## Singleton
+
+class Singleton
+  @instance = new
+
+  private_class_method :new
+  def self.instance
+    @instance
+  end
+
+  def xyz
+    p "Hello Singleton"
+  end
+end
+
+a = Singleton.instance
+b = Singleton.instance
+# c = Singleton.new
+p a.object_id
+p b.object_id
+# p c.object_id

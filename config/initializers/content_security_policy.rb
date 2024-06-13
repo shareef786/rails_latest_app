@@ -23,3 +23,14 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+
+# class Ability
+# include CanCan::Ability
+
+# def initialize(user)
+#   can :read, Metric
+
+#   can :manage, Metric
+
+# end
+# end
