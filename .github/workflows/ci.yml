@@ -21,10 +21,8 @@ jobs:
             cmd: install
         - name: Build and Run Test
           env:
-            DATABASE_URL: postgres://postgres:@localhost:5432/test
+            DATABASE_URL: postgres://postgres:@localhost:5432/rails_latest_app_test
             RAILS_ENV: test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
           run: |
             sudo apt-get -yqq install libpq-dev
             gem install bundler
