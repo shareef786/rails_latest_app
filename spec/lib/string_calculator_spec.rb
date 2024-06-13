@@ -1,5 +1,5 @@
-require 'string_calculator'
+# require 'string_calculator'
 
-describe StringCalculator do
-# write rspec test cases
-end
+# describe StringCalculator do
+# # write rspec test cases
+# end
