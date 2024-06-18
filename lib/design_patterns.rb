@@ -14,18 +14,51 @@ Metric.new(name: '', type: '', value: '')
 
 # Solution
 
-MetricBuilder.build do |builder|
-  builder.set_name('name')
-  builder.set_type('name')
-  builder.set_vale('name')
+class Metric
+  attr_accessor :name, :type, :value
+
+  # def initialize(name, type, value)
+  #     @name, @type, @value = name, type, value
+  # end
 end
+# Metric.new(name: 'metric1', type: 'boolean', value: 1)
 
 class MetricBuilder
-  def self.build
-    builder = new
-    yield(builder)
+  # attr_accessor :metric
+  def self.build(&blk)
+      builder = new
+      blk.call(builder)
+      builder.metric
+  end
+
+  def initialize
+      @metric = Metric.new
+  end
+
+  def set_name(value)
+      @metric.name = value
+  end
+
+  def set_type(value)
+      @metric.type = value
+  end
+
+  def set_value(value)
+      @metric.value = value
+  end
+
+  def metric
+      @metric
   end
 end
+
+res = MetricBuilder.build do |builder|
+  builder.set_name('metric1')
+  builder.set_type('boolean')
+  builder.set_value(1)
+end
+
+puts res.inspect
 
 ## Singleton
 
