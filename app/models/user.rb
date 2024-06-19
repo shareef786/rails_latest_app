@@ -1,5 +1,7 @@
 require 'bcrypt'
 class User < ApplicationRecord
+
+  scope :slow, -> { where("select true from pg_sleep(1)").limit(1)}
   # has_secure_password
   include BCrypt
   validates :email, :user_name, :password_hash, presence: true
